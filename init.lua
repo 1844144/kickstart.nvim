@@ -243,6 +243,35 @@ require('lazy').setup({
   -- My Custom Plugins begin
   'loctvl842/monokai-pro.nvim',
   'rebelot/kanagawa.nvim',
+  {
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    config = function()
+      local configs = require 'nvim-treesitter.configs'
+
+      configs.setup {
+        ensure_installed = { 'c', 'lua', 'vim', 'vimdoc', 'elixir', 'javascript', 'html', 'python', 'go', 'zig', 'rust' },
+        sync_install = false,
+        highlight = { enable = true },
+        indent = { enable = true },
+        textobjects = {
+          select = {
+            enable = true,
+            lookahead = true,
+            keymaps = {
+              -- You can use the capture groups defined in textobjects.scm
+              ['af'] = '@function.outer',
+              ['if'] = '@function.inner',
+              ['ac'] = '@class.outer',
+              ['ic'] = '@class.inner',
+            },
+          },
+        },
+      }
+    end,
+  },
+  'nvim-treesitter/nvim-treesitter-textobjects',
+
   -- My Custom Plugins end
   --
   --
